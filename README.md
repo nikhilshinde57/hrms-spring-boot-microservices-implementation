@@ -41,8 +41,8 @@ Installation
 #### Clone Repository
 Clone repository source code by executing following instruction to any folder on your machine,
 ```
-https://github.com/nikhilshinde57/hrms-spring-boot-microservices-sample.git
-cd hrms-spring-boot-microservices-sample
+https://github.com/nikhilshinde57/hrms-spring-boot-microservices-implementation.git
+cd hrms-spring-boot-microservices-implementation
 ```
 
 Building Application
