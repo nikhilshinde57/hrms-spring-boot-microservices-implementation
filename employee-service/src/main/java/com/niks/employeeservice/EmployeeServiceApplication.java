@@ -1,6 +1,5 @@
 package com.niks.employeeservice;
 
-import com.niks.employeeservice.service.exception.FeignErrorDecoder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;

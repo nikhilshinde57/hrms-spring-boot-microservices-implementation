@@ -1,5 +1,6 @@
 package com.niks.employeeservice.service.exception;
 
+import com.niks.employeeservice.constants.ErrorMessageConstants;
 import feign.Response;
 import feign.codec.ErrorDecoder;
 import org.slf4j.Logger;
@@ -18,7 +19,7 @@ public class FeignErrorDecoder implements ErrorDecoder {
         logger.error("Status code " + response.status() + ", methodKey = ");
       case 404:
       {
-        return new EntityNotFoundException(s);
+        return new EntityNotFoundException(ErrorMessageConstants.ORGANIZATION_BY_ID_NOT_FOUND);
       }
       default:
         return new Exception(response.reason());

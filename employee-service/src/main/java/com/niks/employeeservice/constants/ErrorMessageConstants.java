@@ -38,4 +38,11 @@ public class ErrorMessageConstants {
   public static final String EMPLOYEE_INVALID_INVALID_SORT_BY_COLUMN = "Invalid sort by value.";
   public static final String INVALID_PER_PAGE_VALUE = "Invalid per page value.";
   public static final String INVALID_PAGE_PARAMETER_ERROR = "Invalid page value.";
+
+  /**
+   * Error messages related to Organization entity
+   */
+  public static final String ORGANIZATION_BY_ID_NOT_FOUND = "Organization with given id not found";
+  public static final String ORGANIZATION_SERVICE_NOT_AVAILABLE = "Organization Service is not available temporarily, could not create employee, try after some time";
+
 }

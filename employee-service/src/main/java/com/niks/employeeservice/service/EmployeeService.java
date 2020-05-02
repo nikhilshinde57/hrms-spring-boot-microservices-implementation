@@ -1,8 +1,8 @@
 package com.niks.employeeservice.service;
 
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
+import com.niks.employeeservice.model.db.Organization;
 import com.niks.employeeservice.repository.EmployeeRepository;
+import com.niks.employeeservice.service.exception.OrganizationServiceNotAvailableException;
 import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -32,6 +32,9 @@ public class EmployeeService {
   @Autowired
   OrganizationServiceClient organizationServiceClient;
 
+  @Autowired
+  OrganizationServiceFeignClient organizationServiceFeignClient;
+
   public static final Logger LOGGER = LoggerFactory.getLogger(EmployeeService.class);
 
   public Employee getEmployeeById(Long id) throws EntityNotFoundException {
@@ -51,11 +54,15 @@ public class EmployeeService {
   }
 
   public Employee createEmployee(EmployeeCreateRequest employeeCreateRequest)
-      throws EntityAlreadyExistsException, BadRequestException, EntityNotFoundException {
+      throws EntityAlreadyExistsException, BadRequestException, EntityNotFoundException, OrganizationServiceNotAvailableException {
     List<Employee> employees = employeeRepository
         .findByEmpIdOrEmail(employeeCreateRequest.getEmpId(), employeeCreateRequest.getEmail());
     Optional<Employee> reportTo = getReportsToEmployee(employeeCreateRequest.getReportsTo());
-    organizationServiceClient.getOrganizationById(employeeCreateRequest.getOrganizationId());
+    //Organization organization = organizationServiceClient.getOrganizationById(employeeCreateRequest.getOrganizationId());
+    Organization organization =organizationServiceFeignClient.getOrganizationById(employeeCreateRequest.getOrganizationId());
+    if(organization ==null || organization.getId() == null){
+      throw new OrganizationServiceNotAvailableException(ErrorMessageConstants.ORGANIZATION_SERVICE_NOT_AVAILABLE);
+    }
     if (employees.isEmpty()) {
       Employee employeeToCreate = employeeBuilder
           .buildFromRequest(employeeCreateRequest, reportTo.isPresent() ? reportTo.get() : null);
@@ -99,12 +106,5 @@ public class EmployeeService {
   @Transactional
   public List<Employee> searchEmployee(final EmployeeSearchRequest employeeSearchRequest) {
     return employeeRepository.searchEmployee(employeeSearchRequest);
-  }
-
-  private Employee createEmployee_FallBack(EmployeeCreateRequest employeeCreateRequest, Throwable temp) {
-
-    System.out.println("Organization Service is down!!! fallback route enabled...");
-
-    return new Employee();
   }
 }
