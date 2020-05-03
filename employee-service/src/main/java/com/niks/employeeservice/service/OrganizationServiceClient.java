@@ -1,7 +1,7 @@
 package com.niks.employeeservice.service;
 
 import com.niks.employeeservice.model.db.Organization;
-import com.niks.employeeservice.service.exception.EntityNotFoundException;
+import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,7 +26,8 @@ public class OrganizationServiceClient {
     this.organizationServiceFeignClient = organizationServiceFeignClient;
   }
 
-  public Organization getOrganizationById(Long organizationId) throws EntityNotFoundException {
-      return this.organizationServiceFeignClient.getOrganizationById(organizationId);
+  public Optional<Organization> getOrganizationById(Long organizationId) {
+      Organization organization = this.organizationServiceFeignClient.getOrganizationById(organizationId);
+      return Optional.ofNullable(organization);
   }
 }
