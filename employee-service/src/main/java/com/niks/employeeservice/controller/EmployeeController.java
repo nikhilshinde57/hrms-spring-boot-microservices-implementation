@@ -6,7 +6,6 @@ import com.niks.employeeservice.request.employee.EmployeeSearchRequest;
 import com.niks.employeeservice.request.employee.EmployeeUpdateRequest;
 import com.niks.employeeservice.service.EmployeeService;
 import com.niks.employeeservice.service.exception.BadRequestException;
-import com.niks.employeeservice.service.exception.ServiceException;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -33,8 +32,7 @@ public class EmployeeController {
 
   @GetMapping(value = "/{id}")
   public Employee getEmployeeById(
-      @PathVariable Long id)
-      throws ServiceException {
+      @PathVariable Long id) {
     return employeeService.getEmployeeById(id);
   }
 
@@ -42,7 +40,7 @@ public class EmployeeController {
   @ResponseStatus(HttpStatus.CREATED)
   public Employee createEmployee(
       @Valid @RequestBody @NotNull EmployeeCreateRequest employeeCreateRequest)
-      throws ServiceException, BadRequestException {
+      throws BadRequestException {
     return employeeService.createEmployee(employeeCreateRequest);
   }
 
@@ -56,13 +54,13 @@ public class EmployeeController {
   public Employee updateEmployeeById(
       @PathVariable Long id,
       @NotNull @Valid @RequestBody EmployeeUpdateRequest employeeUpdateRequest)
-      throws ServiceException, BadRequestException {
+      throws BadRequestException {
     return employeeService.updateEmployee(id, employeeUpdateRequest);
   }
 
   @DeleteMapping(value = "/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteEmployeeById(@PathVariable("id") Long id) throws ServiceException {
+  public void deleteEmployeeById(@PathVariable("id") Long id) {
     employeeService.deleteEmployeeById(id);
   }
 

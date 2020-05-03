@@ -5,6 +5,7 @@ import com.niks.employeeservice.repository.EmployeeRepository;
 import com.niks.employeeservice.service.exception.OrganizationServiceNotAvailableException;
 import java.util.List;
 import java.util.Optional;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import com.niks.employeeservice.service.exception.EntityAlreadyExistsException;
 import com.niks.employeeservice.service.exception.EntityNotFoundException;
 
 @Service
+@Slf4j
 public class EmployeeService {
 
   @Autowired
@@ -37,14 +39,14 @@ public class EmployeeService {
 
   public static final Logger LOGGER = LoggerFactory.getLogger(EmployeeService.class);
 
-  public Employee getEmployeeById(Long id) throws EntityNotFoundException {
+  public Employee getEmployeeById(Long id) {
     return employeeRepository.findById(id)
         .orElseThrow(
             () -> new EntityNotFoundException(ErrorMessageConstants.EMPLOYEE_BY_ID_NOT_FOUND));
   }
 
 
-  public Employee getEmployeeByEmployeeId(String employeeId) throws EntityNotFoundException {
+  public Employee getEmployeeByEmployeeId(String employeeId) {
     Employee employee = employeeRepository.findByEmpId(employeeId);
     if (employee == null) {
       throw new EntityNotFoundException(ErrorMessageConstants.EMPLOYEE_BY_ID_NOT_FOUND);
@@ -54,13 +56,15 @@ public class EmployeeService {
   }
 
   public Employee createEmployee(EmployeeCreateRequest employeeCreateRequest)
-      throws EntityAlreadyExistsException, BadRequestException, EntityNotFoundException, OrganizationServiceNotAvailableException {
+      throws BadRequestException {
     List<Employee> employees = employeeRepository
         .findByEmpIdOrEmail(employeeCreateRequest.getEmpId(), employeeCreateRequest.getEmail());
     Optional<Employee> reportTo = getReportsToEmployee(employeeCreateRequest.getReportsTo());
-    //Organization organization = organizationServiceClient.getOrganizationById(employeeCreateRequest.getOrganizationId());
-    Organization organization =organizationServiceFeignClient.getOrganizationById(employeeCreateRequest.getOrganizationId());
-    if(organization ==null || organization.getId() == null){
+
+    Optional<Organization> organization = organizationServiceClient
+        .getOrganizationById(employeeCreateRequest.getOrganizationId());
+
+    if (!organization.isPresent()) {
       throw new OrganizationServiceNotAvailableException(ErrorMessageConstants.ORGANIZATION_SERVICE_NOT_AVAILABLE);
     }
     if (employees.isEmpty()) {
@@ -75,7 +79,7 @@ public class EmployeeService {
 
   @Transactional
   public Employee updateEmployee(final Long id, EmployeeUpdateRequest employeeUpdateRequest)
-      throws EntityNotFoundException, BadRequestException {
+      throws BadRequestException {
     Employee employeeToUpdate = employeeRepository.findById(id)
         .orElseThrow(
             () -> new EntityNotFoundException(ErrorMessageConstants.EMPLOYEE_BY_ID_NOT_FOUND));
@@ -94,7 +98,7 @@ public class EmployeeService {
     return reportTo;
   }
 
-  public void deleteEmployeeById(Long id) throws EntityNotFoundException {
+  public void deleteEmployeeById(Long id) {
     Employee employeeToDelete = getEmployeeById(id);
     employeeRepository.deleteById(employeeToDelete.getId());
   }

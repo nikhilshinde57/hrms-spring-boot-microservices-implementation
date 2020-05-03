@@ -43,6 +43,7 @@ public class ErrorMessageConstants {
    * Error messages related to Organization entity
    */
   public static final String ORGANIZATION_BY_ID_NOT_FOUND = "Organization with given id not found";
+  public static final String ORGANIZATION_ID_IS_INVALID = "Provided organizationId is not valid";
   public static final String ORGANIZATION_SERVICE_NOT_AVAILABLE = "Organization Service is not available temporarily, could not create employee, try after some time";
-
+  public static final String ORGANIZATION_SERVICE_ERROR = "Something went wrong with Organization service";
 }
