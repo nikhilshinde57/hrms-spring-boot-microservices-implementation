@@ -1,10 +1,11 @@
 package com.niks.employeeservice.service;
 
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
+import com.niks.employeeservice.model.db.Organization;
 import com.niks.employeeservice.repository.EmployeeRepository;
+import com.niks.employeeservice.service.exception.OrganizationServiceNotAvailableException;
 import java.util.List;
 import java.util.Optional;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import com.niks.employeeservice.service.exception.EntityAlreadyExistsException;
 import com.niks.employeeservice.service.exception.EntityNotFoundException;
 
 @Service
+@Slf4j
 public class EmployeeService {
 
   @Autowired
@@ -32,16 +34,19 @@ public class EmployeeService {
   @Autowired
   OrganizationServiceClient organizationServiceClient;
 
+  @Autowired
+  OrganizationServiceFeignClient organizationServiceFeignClient;
+
   public static final Logger LOGGER = LoggerFactory.getLogger(EmployeeService.class);
 
-  public Employee getEmployeeById(Long id) throws EntityNotFoundException {
+  public Employee getEmployeeById(Long id) {
     return employeeRepository.findById(id)
         .orElseThrow(
             () -> new EntityNotFoundException(ErrorMessageConstants.EMPLOYEE_BY_ID_NOT_FOUND));
   }
 
 
-  public Employee getEmployeeByEmployeeId(String employeeId) throws EntityNotFoundException {
+  public Employee getEmployeeByEmployeeId(String employeeId) {
     Employee employee = employeeRepository.findByEmpId(employeeId);
     if (employee == null) {
       throw new EntityNotFoundException(ErrorMessageConstants.EMPLOYEE_BY_ID_NOT_FOUND);
@@ -51,11 +56,17 @@ public class EmployeeService {
   }
 
   public Employee createEmployee(EmployeeCreateRequest employeeCreateRequest)
-      throws EntityAlreadyExistsException, BadRequestException, EntityNotFoundException {
+      throws BadRequestException {
     List<Employee> employees = employeeRepository
         .findByEmpIdOrEmail(employeeCreateRequest.getEmpId(), employeeCreateRequest.getEmail());
     Optional<Employee> reportTo = getReportsToEmployee(employeeCreateRequest.getReportsTo());
-    organizationServiceClient.getOrganizationById(employeeCreateRequest.getOrganizationId());
+
+    Optional<Organization> organization = organizationServiceClient
+        .getOrganizationById(employeeCreateRequest.getOrganizationId());
+
+    if (!organization.isPresent()) {
+      throw new OrganizationServiceNotAvailableException(ErrorMessageConstants.ORGANIZATION_SERVICE_NOT_AVAILABLE);
+    }
     if (employees.isEmpty()) {
       Employee employeeToCreate = employeeBuilder
           .buildFromRequest(employeeCreateRequest, reportTo.isPresent() ? reportTo.get() : null);
@@ -68,7 +79,7 @@ public class EmployeeService {
 
   @Transactional
   public Employee updateEmployee(final Long id, EmployeeUpdateRequest employeeUpdateRequest)
-      throws EntityNotFoundException, BadRequestException {
+      throws BadRequestException {
     Employee employeeToUpdate = employeeRepository.findById(id)
         .orElseThrow(
             () -> new EntityNotFoundException(ErrorMessageConstants.EMPLOYEE_BY_ID_NOT_FOUND));
@@ -87,7 +98,7 @@ public class EmployeeService {
     return reportTo;
   }
 
-  public void deleteEmployeeById(Long id) throws EntityNotFoundException {
+  public void deleteEmployeeById(Long id) {
     Employee employeeToDelete = getEmployeeById(id);
     employeeRepository.deleteById(employeeToDelete.getId());
   }
@@ -99,12 +110,5 @@ public class EmployeeService {
   @Transactional
   public List<Employee> searchEmployee(final EmployeeSearchRequest employeeSearchRequest) {
     return employeeRepository.searchEmployee(employeeSearchRequest);
-  }
-
-  private Employee createEmployee_FallBack(EmployeeCreateRequest employeeCreateRequest, Throwable temp) {
-
-    System.out.println("Organization Service is down!!! fallback route enabled...");
-
-    return new Employee();
   }
 }
