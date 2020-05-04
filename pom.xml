@@ -16,6 +16,7 @@
     <module>config-service</module>
     <module>organization-service</module>
     <module>employee-service</module>
+    <module>leave-service</module>
   </modules>
 
 </project>
