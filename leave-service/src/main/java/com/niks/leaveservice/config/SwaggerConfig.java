@@ -24,8 +24,8 @@ public class SwaggerConfig {
 
   private ApiInfo metaData() {
     return new ApiInfoBuilder()
-        .description("Employee service REST API")
-        .title("Employee service REST API")
+        .description("Leave service REST API")
+        .title("Leave service REST API")
         .version("1.0")
         .termsOfServiceUrl("Terms of service")
         .contact(new Contact("Nikhil Shinde", "", "nikhilshinde57@gmail.com"))
