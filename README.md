@@ -22,7 +22,7 @@ The application includes following functional microservices & infrastructure mic
 Functional Microservices
 * **Organization Microservice**
 * **Employee Microservice**
-* ~~Leave Microservice~~ [_TODO_]
+* Leave Microservice [_TODO_]
 * ~~Authentication Microservice~~ [_TODO_]
 * ~~ Microservice~~ [_TODO_]
 
@@ -75,10 +75,17 @@ cd employee-service
 mvn clean install
 mvn spring-boot:run
 ```
+##### Leave Microservice
+```
+cd leave-service
+mvn clean install
+mvn spring-boot:run
+```
 
 ##### Check all services are up and running in service registration service 
 Service Registration Microservice: http://localhost:8761/. Here you can see all services are up or not and they are registered or not.
 ##### For Functional Microservices you can check the all REST API's details on swagger ui.
 Swagger ui for Organization Microservice: http://localhost:8030/swagger-ui.html<br />
 Swagger ui for Employee Microservice: http://localhost:8040/swagger-ui.html<br />
+Swagger ui for Leave Microservice: http://localhost:8050/swagger-ui.html<br />
 
