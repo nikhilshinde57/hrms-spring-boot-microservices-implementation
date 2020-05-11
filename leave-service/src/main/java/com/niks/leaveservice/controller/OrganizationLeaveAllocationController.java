@@ -1,8 +1,8 @@
 package com.niks.leaveservice.controller;
 
 import com.niks.leaveservice.model.db.OrganizationLeaveAllocation;
-import com.niks.leaveservice.request.OrganizationLeaveAllocationCreateRequest;
-import com.niks.leaveservice.request.OrganizationLeaveAllocationUpdateRequest;
+import com.niks.leaveservice.request.leave.allocation.organization.OrganizationLeaveAllocationCreateRequest;
+import com.niks.leaveservice.request.leave.allocation.organization.OrganizationLeaveAllocationUpdateRequest;
 import com.niks.leaveservice.service.OrganizationLeaveAllocationService;
 import java.util.List;
 import javax.validation.Valid;

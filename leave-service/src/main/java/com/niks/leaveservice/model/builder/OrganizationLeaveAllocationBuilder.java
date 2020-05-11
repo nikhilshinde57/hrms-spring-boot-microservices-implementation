@@ -2,8 +2,8 @@ package com.niks.leaveservice.model.builder;
 
 import com.niks.leaveservice.model.db.LeaveType;
 import com.niks.leaveservice.model.db.OrganizationLeaveAllocation;
-import com.niks.leaveservice.request.OrganizationLeaveAllocationCreateRequest;
-import com.niks.leaveservice.request.OrganizationLeaveAllocationUpdateRequest;
+import com.niks.leaveservice.request.leave.allocation.organization.OrganizationLeaveAllocationCreateRequest;
+import com.niks.leaveservice.request.leave.allocation.organization.OrganizationLeaveAllocationUpdateRequest;
 import java.util.UUID;
 import org.springframework.stereotype.Component;
 

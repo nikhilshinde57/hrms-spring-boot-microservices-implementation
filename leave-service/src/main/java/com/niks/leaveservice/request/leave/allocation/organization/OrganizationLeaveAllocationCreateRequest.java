@@ -1,4 +1,4 @@
-package com.niks.leaveservice.request;
+package com.niks.leaveservice.request.leave.allocation.organization;
 
 import com.niks.leaveservice.constants.ErrorMessageConstants;
 import javax.validation.constraints.AssertTrue;
