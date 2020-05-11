@@ -116,4 +116,11 @@ public class ErrorMessageConstants {
       "Carried leaves can not be less than zero";
   public static final String EMPLOYEE_LEAVE_GIVEN_TYPE_OF_LEAVE_NOT_ALLOCATED_FOR_GIVEN_EMPLOYEE =
       "Given type of leave is not allocated for given employee in given date range";
+
+  /**
+   * Error messages related to Leave_Status entity
+   */
+  public static final String LEAVE_STATUS_BY_ID_NOT_FOUND = "LeaveStatus with given id not found";
+  public static final String LEAVE_STATUS_BY_STATUS_NAME_NOT_FOUND = "LeaveStatus with given status value not found";
+
 }
