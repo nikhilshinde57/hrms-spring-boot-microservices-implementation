@@ -29,7 +29,7 @@ Functional Microservices
 Infrastructure Microservices
 * **Global Configuration Microservice**
 * **Service Registration & Discovery Microservice**
-* ~~API Gateway~~ [_TODO_]
+* **API Gateway**
 
 Prerequisites to run the application
 * **_JDK 8_** - Install JDK 1.8 version from, http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
@@ -82,8 +82,34 @@ mvn clean install
 mvn spring-boot:run
 ```
 
+##### Gateway Microservice
+```
+cd gateway-service
+mvn clean install
+mvn spring-boot:run
+```
+
 ##### Check all services are up and running in service registration service 
-Service Registration Microservice: http://localhost:8761/. Here you can see all services are up or not and they are registered or not.
+Service Registration Microservice: http://localhost:8761/ <br />
+Here you can see all services are up or not and they are registered or not.<br /><br />
+Gateway Service: http://localhost:8762/routes <br />
+Here you can see all the available routes.
+
+```
+// 20200512201118
+// http://localhost:8762/routes
+
+{
+  "/leave-service/**": "leave-service",
+  "/employee-service/**": "employee-service",
+  "/config-service/**": "config-service",
+  "/organization-service/**": "organization-service"
+}
+
+Now using above Gateway Service routes we can now call the other services like 
+To get all employess we use: http://localhost:8762/employee-service/api/employees
+To get all organizations we use: http://localhost:8762/organization-service/api/organizations  
+```
 ##### For Functional Microservices you can check the all REST API's details on swagger ui.
 Swagger ui for Organization Microservice: http://localhost:8030/swagger-ui.html<br />
 Swagger ui for Employee Microservice: http://localhost:8040/swagger-ui.html<br />

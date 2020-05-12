@@ -17,6 +17,7 @@
     <module>organization-service</module>
     <module>employee-service</module>
     <module>leave-service</module>
+    <module>gateway-service</module>
   </modules>
 
 </project>
