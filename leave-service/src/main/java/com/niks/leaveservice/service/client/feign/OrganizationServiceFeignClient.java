@@ -1,4 +1,4 @@
-package com.niks.leaveservice.service;
+package com.niks.leaveservice.service.client.feign;
 
 import com.niks.leaveservice.model.db.Organization;
 import org.springframework.cloud.openfeign.FeignClient;

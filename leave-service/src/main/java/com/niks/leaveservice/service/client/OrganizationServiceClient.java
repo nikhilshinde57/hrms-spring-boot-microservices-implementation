@@ -1,8 +1,9 @@
-package com.niks.leaveservice.service;
+package com.niks.leaveservice.service.client;
 
 import com.netflix.hystrix.exception.HystrixRuntimeException;
 import com.niks.leaveservice.constants.ErrorMessageConstants;
 import com.niks.leaveservice.model.db.Organization;
+import com.niks.leaveservice.service.client.feign.OrganizationServiceFeignClient;
 import com.niks.leaveservice.service.exception.EntityNotFoundException;
 import com.niks.leaveservice.service.exception.OrganizationServiceException;
 import com.niks.leaveservice.service.exception.OrganizationServiceNotAvailableException;
