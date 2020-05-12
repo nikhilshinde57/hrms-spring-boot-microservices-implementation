@@ -1,6 +1,5 @@
 package com.niks.leaveservice.controller;
 
-import com.niks.leaveservice.model.db.EmployeeLeaveAllocation;
 import com.niks.leaveservice.request.leave.allocation.employee.EmployeeLeaveAllocationCreateRequest;
 import com.niks.leaveservice.request.leave.allocation.employee.EmployeeLeaveAllocationUpdateRequest;
 import com.niks.leaveservice.response.leave.allocation.employee.EmployeeLeaveAllocationResponse;
