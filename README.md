@@ -22,14 +22,14 @@ The application includes following functional microservices & infrastructure mic
 Functional Microservices
 * **Organization Microservice**
 * **Employee Microservice**
-* ~~Leave Microservice~~ [_TODO_]
+* Leave Microservice [_TODO_]
 * ~~Authentication Microservice~~ [_TODO_]
 * ~~ Microservice~~ [_TODO_]
 
 Infrastructure Microservices
 * **Global Configuration Microservice**
 * **Service Registration & Discovery Microservice**
-* ~~API Gateway~~ [_TODO_]
+* **API Gateway**
 
 Prerequisites to run the application
 * **_JDK 8_** - Install JDK 1.8 version from, http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
@@ -41,8 +41,8 @@ Installation
 #### Clone Repository
 Clone repository source code by executing following instruction to any folder on your machine,
 ```
-https://github.com/nikhilshinde57/hrms-spring-boot-microservices-sample.git
-cd hrms-spring-boot-microservices-sample
+https://github.com/nikhilshinde57/hrms-spring-boot-microservices-implementation.git
+cd hrms-spring-boot-microservices-implementation
 ```
 
 Building Application
@@ -75,10 +75,43 @@ cd employee-service
 mvn clean install
 mvn spring-boot:run
 ```
+##### Leave Microservice
+```
+cd leave-service
+mvn clean install
+mvn spring-boot:run
+```
+
+##### Gateway Microservice
+```
+cd gateway-service
+mvn clean install
+mvn spring-boot:run
+```
 
 ##### Check all services are up and running in service registration service 
-Service Registration Microservice: http://localhost:8761/. Here you can see all services are up or not and they are registered or not.
+Service Registration Microservice: http://localhost:8761/ <br />
+Here you can see all services are up or not and they are registered or not.<br /><br />
+Gateway Service: http://localhost:8762/routes <br />
+Here you can see all the available routes.
+
+```
+// 20200512201118
+// http://localhost:8762/routes
+
+{
+  "/leave-service/**": "leave-service",
+  "/employee-service/**": "employee-service",
+  "/config-service/**": "config-service",
+  "/organization-service/**": "organization-service"
+}
+
+Now using above Gateway Service routes we can now call the other services like 
+To get all employess we use: http://localhost:8762/employee-service/api/employees
+To get all organizations we use: http://localhost:8762/organization-service/api/organizations  
+```
 ##### For Functional Microservices you can check the all REST API's details on swagger ui.
 Swagger ui for Organization Microservice: http://localhost:8030/swagger-ui.html<br />
 Swagger ui for Employee Microservice: http://localhost:8040/swagger-ui.html<br />
+Swagger ui for Leave Microservice: http://localhost:8050/swagger-ui.html<br />
 
