@@ -22,9 +22,8 @@ The application includes following functional microservices & infrastructure mic
 Functional Microservices
 * **Organization Microservice**
 * **Employee Microservice**
-* Leave Microservice [_TODO_]
+* **Leave Microservice**
 * ~~Authentication Microservice~~ [_TODO_]
-* ~~ Microservice~~ [_TODO_]
 
 Infrastructure Microservices
 * **Global Configuration Microservice**
@@ -90,10 +89,8 @@ mvn spring-boot:run
 ```
 
 ##### Check all services are up and running in service registration service 
-Service Registration Microservice: http://localhost:8761/ <br />
-Here you can see all services are up or not and they are registered or not.<br /><br />
-Gateway Service: http://localhost:8762/routes <br />
-Here you can see all the available routes.
+Service Registration Microservice: [Here](http://localhost:8761/) you can see all services are up or not and they are registered or not.<br /><br />
+Gateway Service: [Here](http://localhost:8762/routes) Here you can see all the available routes.
 
 ```
 // 20200512201118
@@ -110,8 +107,16 @@ Now using above Gateway Service routes we can now call the other services like
 To get all employess we use: http://localhost:8762/employee-service/api/employees
 To get all organizations we use: http://localhost:8762/organization-service/api/organizations  
 ```
-##### For Functional Microservices you can check the all REST API's details on swagger ui.
-Swagger ui for Organization Microservice: http://localhost:8030/swagger-ui.html<br />
-Swagger ui for Employee Microservice: http://localhost:8040/swagger-ui.html<br />
-Swagger ui for Leave Microservice: http://localhost:8050/swagger-ui.html<br />
 
+##### Health Checks
+
+- [Organization Service Health Check](http://localhost:8030/actuator/health)
+- [Employee Service Health Check](http://localhost:8040/actuator/health)
+- [Leave Service Health Check](http://localhost:8050/actuator/health)
+- [Config Service Health Check](http://localhost:8888/actuator/health)
+
+
+##### Swagger UI For Functional Microservices
+- [Organization Microservice](http://localhost:8030/swagger-ui.html)
+- [Employee Microservice](http://localhost:8040/swagger-ui.html)
+- [Leave Microservice](http://localhost:8050/swagger-ui.html)
