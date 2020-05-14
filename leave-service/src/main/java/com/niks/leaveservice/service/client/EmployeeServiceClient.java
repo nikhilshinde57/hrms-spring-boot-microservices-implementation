@@ -35,9 +35,9 @@ public class EmployeeServiceClient {
           "Exception occurred while calling getEmployeeById method of Employee service with employeeId as %s",
           employeeId),
           ex);
-      if (((FeignException) ex.getCause()).status() == 404) {
+      if ((ex.getCause() instanceof FeignException) && ((FeignException) ex.getCause()).status() == 404) {
         throw new EntityNotFoundException(ErrorMessageConstants.EMPLOYEE_BY_ID_NOT_FOUND);
-      } else if (((FeignException) ex.getCause()).status() == 400) {
+      } else if ((ex.getCause() instanceof FeignException) && ((FeignException) ex.getCause()).status() == 400) {
         throw new OrganizationServiceException(ErrorMessageConstants.EMPLOYEE_ID_IS_INVALID);
       } else {
         throw new OrganizationServiceNotAvailableException(ErrorMessageConstants.EMPLOYEE_SERVICE_NOT_AVAILABLE);
