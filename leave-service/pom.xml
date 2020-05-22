@@ -7,6 +7,10 @@
   <groupId>com.niks</groupId>
   <artifactId>leave-service</artifactId>
   <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>leave-service</name>
+  <description>Leave service handles all organization and employee leave allocation/application CRUD operations</description>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -143,16 +147,6 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <configuration>
-          <classifier>exec</classifier>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>build-info</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
     </plugins>
     <pluginManagement>
