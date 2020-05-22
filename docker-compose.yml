@@ -78,7 +78,7 @@ services:
     depends_on:
       - db
       - eurekaservice
-      - configservic
+      - configservice
     networks:
       - hrms-net
 volumes:
