@@ -1,0 +1,87 @@
+version: "3.8"
+services:
+
+  eurekaservice:
+    build: ./eureka-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    ports:
+      - "8761:8761"
+    networks:
+      - hrms-net
+  gatewayservice:
+    build: ./gateway-service
+    ports:
+      - "8762:8762"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    depends_on:
+      - eurekaservice
+    networks:
+      - hrms-net
+  db:
+    build: ./database-service
+    image: postgres:latest
+    volumes:
+      - ./data:/data
+    environment:
+      - POSTGRES_USER=hrms
+      - POSTGRES_PASSWORD=hrms
+    ports:
+      - 5432:5432
+    networks:
+      - hrms-net
+  configservice:
+    build: ./config-service
+    ports:
+      - "8888:8888"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    depends_on:
+      - db
+      - eurekaservice
+    networks:
+      - hrms-net
+  organization-service:
+    build: ./organization-service
+    ports:
+      - "8030:8030"
+    entrypoint:  sh -c './wait-for.sh --timeout=120 configservice:8888 -- echo "Configservice is up and starting Organization service" && java -jar organization-service-1.0-SNAPSHOT.jar'
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    depends_on:
+      - db
+      - eurekaservice
+      - configservice
+    networks:
+      - hrms-net
+  employee-service:
+    build: ./employee-service
+    ports:
+      - "8040:8040"
+    entrypoint:  sh -c './wait-for.sh --timeout=120 configservice:8888 -- echo "Configservice is up and starting Employee service" && java -jar employee-service-1.0-SNAPSHOT.jar'
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    depends_on:
+      - db
+      - eurekaservice
+      - configservice
+    networks:
+      - hrms-net
+  leave-service:
+    build: ./leave-service
+    ports:
+      - "8050:8050"
+    entrypoint:  sh -c './wait-for.sh --timeout=120 configservice:8888 -- echo "Configservice is up and starting Leave service" && java -jar leave-service-1.0-SNAPSHOT.jar'
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    depends_on:
+      - db
+      - eurekaservice
+      - configservic
+    networks:
+      - hrms-net
+volumes:
+  db:
+networks:
+  hrms-net:
