@@ -7,6 +7,10 @@
   <groupId>com.niks</groupId>
   <artifactId>gateway-service</artifactId>
   <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>gateway-service</name>
+  <description>Gateway service, central entry point for outside world, here call gets redirected to respective microservices depends on path variable</description>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -50,7 +54,6 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
 
   <build>
     <plugins>
