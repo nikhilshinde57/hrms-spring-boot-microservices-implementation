@@ -34,9 +34,9 @@ public class OrganizationServiceClient {
           "Exception occurred while calling getOrganizationById method of Organization service with organizationId as %s",
           organizationId),
           ex);
-      if (((FeignException) ex.getCause()).status() == 404) {
+      if ((ex.getCause() instanceof FeignException) && ((FeignException) ex.getCause()).status() == 404) {
         throw new EntityNotFoundException(ErrorMessageConstants.ORGANIZATION_BY_ID_NOT_FOUND);
-      } else if (((FeignException) ex.getCause()).status() == 400) {
+      } else if ((ex.getCause() instanceof FeignException) && ((FeignException) ex.getCause()).status() == 400) {
         throw new OrganizationServiceException(ErrorMessageConstants.ORGANIZATION_ID_IS_INVALID);
       } else {
         throw new OrganizationServiceNotAvailableException(ErrorMessageConstants.ORGANIZATION_SERVICE_NOT_AVAILABLE);

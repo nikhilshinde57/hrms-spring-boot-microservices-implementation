@@ -7,9 +7,10 @@
   <groupId>com.niks</groupId>
   <artifactId>eureka-service</artifactId>
   <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
 
   <name>eureka-service</name>
-  <description>Service discovery project</description>
+  <description>Service discovery service, here all microservices are get register them self when they are up</description>
 
   <parent>
     <groupId>org.springframework.boot</groupId>

@@ -7,8 +7,10 @@
   <groupId>com.niks</groupId>
   <artifactId>organization-service</artifactId>
   <version>1.0-SNAPSHOT</version>
-
   <packaging>jar</packaging>
+
+  <name>organization-service</name>
+  <description>Organization service handles all organization CRUD operations</description>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -135,16 +137,6 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <configuration>
-          <classifier>exec</classifier>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>build-info</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
     </plugins>
     <pluginManagement>
