@@ -18,6 +18,7 @@
     <module>employee-service</module>
     <module>leave-service</module>
     <module>gateway-service</module>
+    <module>authentication-service</module>
   </modules>
 
 </project>
