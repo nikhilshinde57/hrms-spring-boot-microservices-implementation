@@ -19,6 +19,7 @@
     <module>leave-service</module>
     <module>gateway-service</module>
     <module>oauth2_authentication_service</module>
+    <module>authentication-service</module>
   </modules>
 
 </project>

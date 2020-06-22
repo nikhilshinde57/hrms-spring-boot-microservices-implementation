@@ -10,22 +10,11 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 
 public class JWTTokenEnhancer implements TokenEnhancer {
 
-//  @Autowired
-//  private OrgUserRepository orgUserRepo;
-//
-//  private String getOrgId(String userName){
-//    UserOrganization orgUser = orgUserRepo.findByUserName( userName );
-//    return orgUser.getOrganizationId();
-//  }
-
   @Override
   public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
-    Map<String, Object> additionalInfo = new HashMap<>();
-//    String orgId =  getOrgId(authentication.getName());
-
-    additionalInfo.put("NikName", "Nikhil_Shinde");
-
-    ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
+    //Map<String, Object> additionalInfo = new HashMap<>();
+    //additionalInfo.put("NikName", "Nikhil_Shinde");
+    //((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
     return accessToken;
   }
 }

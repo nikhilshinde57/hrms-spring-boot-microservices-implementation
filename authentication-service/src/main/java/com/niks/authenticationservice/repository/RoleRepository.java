@@ -1,7 +1,7 @@
-package com.niks.oauth2authenticationservice.repository;
+package com.niks.authenticationservice.repository;
 
-import com.niks.oauth2authenticationservice.enums.ERole;
-import com.niks.oauth2authenticationservice.models.db.Role;
+import com.niks.authenticationservice.enums.ERole;
+import com.niks.authenticationservice.model.db.Role;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
