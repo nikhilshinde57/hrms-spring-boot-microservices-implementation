@@ -2,10 +2,13 @@ package com.niks.oauth2authenticationservice.controller;
 
 import com.niks.oauth2authenticationservice.request.SignupRequest;
 import com.niks.oauth2authenticationservice.service.UserService;
+import java.util.Map;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +23,12 @@ public class AuthController {
   UserService userService;
 
   @PostMapping("/signup")
-  public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+  public ResponseEntity registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
     return userService.registerUser(signUpRequest);
+  }
+
+  @GetMapping(value = {"/user"}, produces = "application/json")
+  public Map<String, Object> user(OAuth2Authentication user) {
+    return userService.getUserInfo(user);
   }
 }

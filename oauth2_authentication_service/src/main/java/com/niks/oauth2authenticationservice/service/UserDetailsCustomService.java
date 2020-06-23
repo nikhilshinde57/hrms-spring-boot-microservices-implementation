@@ -5,8 +5,6 @@ import com.niks.oauth2authenticationservice.models.db.Role;
 import com.niks.oauth2authenticationservice.models.db.User;
 import com.niks.oauth2authenticationservice.repository.UserRepository;
 import com.niks.oauth2authenticationservice.service.exception.RoleNotFundException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,21 +27,21 @@ public class UserDetailsCustomService implements UserDetailsService {
     org.springframework.security.core.userdetails.User.UserBuilder builder = org.springframework.security.core.userdetails.User
         .builder().passwordEncoder(encoder::encode);
     if (user != null) {
-
       builder = org.springframework.security.core.userdetails.User.withUsername(userName);
       builder.password(user.getPassword());
       builder.roles(getRoleNames(user.getRoles()));
     } else {
-      throw new UsernameNotFoundException("User not found.");
+      throw new UsernameNotFoundException(ErrorMessageConstants.USER_NAME_NOT_FOUND);
     }
     return builder.build();
   }
 
   private String [] getRoleNames(Set<Role> roles){
-    List<String> roleList = new ArrayList<>();
+    String [] roleList = new String[roles.size()];
+    int cnt = 0;
     for (Role role:roles) {
-      roleList.add(role.getName().name());
+      roleList[cnt++]=role.getName().name();
     }
-    return (String[]) roleList.toArray();
+    return roleList;
   }
 }

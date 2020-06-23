@@ -12,8 +12,13 @@ public class ErrorMessageConstants {
   public static final String USER_NAME_NOT_FOUND = "User with given Username is not found.";
 
   /**
-   * Error messages related to User entity
+   * Error messages related to Role entity
    */
   public static final String ROLE_NOT_FOUND ="Role with given name not found";
 
+  /**
+   * Error messages related to ClientRegistrationException
+   */
+  public static final String CLIENT_ID_INVALID ="invalid_clientId";
+  public static final String CLIENT_NOT_REGISTERED ="Client with given clientId/Name/userName not found";
 }

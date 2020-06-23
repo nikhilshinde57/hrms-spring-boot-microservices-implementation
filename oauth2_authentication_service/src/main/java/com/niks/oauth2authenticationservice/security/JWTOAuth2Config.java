@@ -1,5 +1,6 @@
 package com.niks.oauth2authenticationservice.security;
 
+import com.niks.oauth2authenticationservice.service.CustomClientDetailsService;
 import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -8,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
@@ -17,6 +19,9 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 
 @Configuration
 public class JWTOAuth2Config extends AuthorizationServerConfigurerAdapter {
+
+  @Autowired
+  private CustomClientDetailsService customClientDetailsService;
 
   @Autowired
   private AuthenticationManager authenticationManager;
@@ -41,9 +46,9 @@ public class JWTOAuth2Config extends AuthorizationServerConfigurerAdapter {
     TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
     tokenEnhancerChain.setTokenEnhancers(Arrays.asList(jwtTokenEnhancer, jwtAccessTokenConverter));
 
-    endpoints.tokenStore(tokenStore)                             //JWT
-        .accessTokenConverter(jwtAccessTokenConverter)       //JWT
-        .tokenEnhancer(tokenEnhancerChain)                   //JWT
+    endpoints.tokenStore(tokenStore)
+        .accessTokenConverter(jwtAccessTokenConverter)
+        .tokenEnhancer(tokenEnhancerChain)
         .authenticationManager(authenticationManager)
         .userDetailsService(userDetailsService);
   }
@@ -52,10 +57,14 @@ public class JWTOAuth2Config extends AuthorizationServerConfigurerAdapter {
   @Override
   public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 
-    clients.inMemory()
+    clients.withClientDetails(customClientDetailsService);
+
+    //We can use the inMemory function and save the clients in memory
+    /*clients.inMemory()
         .withClient("eagleeye")
         .secret("{noop}thisissecret")
         .authorizedGrantTypes("refresh_token", "password", "client_credentials")
         .scopes("webclient", "mobileclient");
+     */
   }
 }

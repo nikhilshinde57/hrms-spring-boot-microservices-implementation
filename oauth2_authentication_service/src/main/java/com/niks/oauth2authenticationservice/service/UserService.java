@@ -10,10 +10,14 @@ import com.niks.oauth2authenticationservice.repository.UserRepository;
 import com.niks.oauth2authenticationservice.request.SignupRequest;
 import com.niks.oauth2authenticationservice.response.MessageResponse;
 import com.niks.oauth2authenticationservice.service.exception.RoleNotFundException;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -51,6 +55,20 @@ public class UserService {
     user.setRoles(roles);
     userRepository.save(user);
     return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+  }
+
+  public Map<String, Object> getUserInfo(OAuth2Authentication user){
+    Map<String, Object> userInfo = new HashMap<>();
+    userInfo.put(
+        "user",
+        user.getUserAuthentication()
+            .getPrincipal());
+    userInfo.put(
+        "authorities",
+        AuthorityUtils.authorityListToSet(
+            user.getUserAuthentication()
+                .getAuthorities()));
+    return userInfo;
   }
 
   private Set<Role> validateAndGetUserRoles(Set<String> strRoles) {
