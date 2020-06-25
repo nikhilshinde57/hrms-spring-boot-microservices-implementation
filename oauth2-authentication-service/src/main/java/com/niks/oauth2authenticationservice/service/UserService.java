@@ -57,7 +57,7 @@ public class UserService {
     return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
   }
 
-  public Map<String, Object> getUserInfo(OAuth2Authentication user){
+  public Map<String, Object> getUserInfo(OAuth2Authentication user) {
     Map<String, Object> userInfo = new HashMap<>();
     userInfo.put(
         "user",
@@ -68,6 +68,10 @@ public class UserService {
         AuthorityUtils.authorityListToSet(
             user.getUserAuthentication()
                 .getAuthorities()));
+    userInfo.put("clientId", user.getOAuth2Request()
+        .getClientId());
+    userInfo.put("scope", user.getOAuth2Request()
+        .getScope());
     return userInfo;
   }
 
