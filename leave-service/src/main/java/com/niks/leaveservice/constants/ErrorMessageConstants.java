@@ -123,4 +123,10 @@ public class ErrorMessageConstants {
   public static final String LEAVE_STATUS_BY_ID_NOT_FOUND = "LeaveStatus with given id not found";
   public static final String LEAVE_STATUS_BY_STATUS_NAME_NOT_FOUND = "LeaveStatus with given status value not found";
 
+  /**
+   * Error messages related to Authentication error
+   */
+
+  public static final String OAUTH_NOT_SUPPORTED_OPERATION = "Not supported: read access token";
+  public static final String OAUTH_FAILED_TO_FETCH_USER =  "Could not fetch user details";
 }
