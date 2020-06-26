@@ -46,4 +46,11 @@ public class ErrorMessageConstants {
   public static final String ORGANIZATION_ID_IS_INVALID = "Provided organizationId is not valid";
   public static final String ORGANIZATION_SERVICE_NOT_AVAILABLE = "Organization Service is not available temporarily, could not create employee, try after some time";
   public static final String ORGANIZATION_SERVICE_ERROR = "Something went wrong with Organization service";
+
+  /**
+   * Error messages related to Authentication error
+   */
+
+  public static final String OAUTH_NOT_SUPPORTED_OPERATION = "Not supported: read access token";
+  public static final String OAUTH_FAILED_TO_FETCH_USER =  "Could not fetch user details";
 }

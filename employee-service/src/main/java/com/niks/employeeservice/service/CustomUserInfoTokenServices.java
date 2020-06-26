@@ -1,5 +1,6 @@
 package com.niks.employeeservice.service;
 
+import com.niks.employeeservice.constants.ErrorMessageConstants;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -36,6 +37,7 @@ public class CustomUserInfoTokenServices implements ResourceServerTokenServices 
   private static final String UNKNOWN = "unknown";
   private static final String CLIENT_ID = "clientId";
   private static final String SCOPE = "scope";
+  private static final String CREDENTIALS = "N/A";
 
   private static final String[] PRINCIPAL_KEYS = new String[]{"user", "username",
       "userid", "user_id", "login", "id", "name"};
@@ -51,7 +53,7 @@ public class CustomUserInfoTokenServices implements ResourceServerTokenServices 
     Map<String, Object> map = getMap(this.userInfoEndpointUrl, accessToken);
 
     if (map.containsKey(ERROR)) {
-      LOGGER.debug("userinfo returned error: " + map.get("error"));
+      LOGGER.debug("userinfo returned error: " + map.get(ERROR));
       throw new InvalidTokenException(accessToken);
     }
     return extractAuthentication(map);
@@ -64,7 +66,7 @@ public class CustomUserInfoTokenServices implements ResourceServerTokenServices 
     List<GrantedAuthority> authorities = this.authoritiesExtractor
         .extractAuthorities(map);
     UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
-        principal, "N/A", authorities);
+        principal,CREDENTIALS , authorities);
     token.setDetails(map);
     return new OAuth2Authentication(request, token);
   }
@@ -78,7 +80,6 @@ public class CustomUserInfoTokenServices implements ResourceServerTokenServices 
     return UNKNOWN;
   }
 
-  @SuppressWarnings({"unchecked"})
   private OAuth2Request getRequest(Map<String, Object> map) {
 
     String clientId = (String) map.get(CLIENT_ID);
@@ -88,7 +89,6 @@ public class CustomUserInfoTokenServices implements ResourceServerTokenServices 
         null, null, null, null);
   }
 
-  @SuppressWarnings({"unchecked"})
   private Map<String, Object> getMap(String path, String accessToken) {
 
     LOGGER.info("Getting user info from: " + path);
@@ -110,15 +110,15 @@ public class CustomUserInfoTokenServices implements ResourceServerTokenServices 
       }
       return restTemplate.getForEntity(path, Map.class).getBody();
     } catch (Exception ex) {
-      LOGGER.info("Could not fetch user details: " + ex.getClass() + ", "
+      LOGGER.info(ErrorMessageConstants.OAUTH_FAILED_TO_FETCH_USER +": " + ex.getClass() + ", "
           + ex.getMessage());
-      return Collections.<String, Object>singletonMap("error",
-          "Could not fetch user details");
+      return Collections.<String, Object>singletonMap(ERROR,
+          ErrorMessageConstants.OAUTH_FAILED_TO_FETCH_USER);
     }
   }
 
   @Override
   public OAuth2AccessToken readAccessToken(String s) {
-    throw new UnsupportedOperationException("Not supported: read access token");
+    throw new UnsupportedOperationException(ErrorMessageConstants.OAUTH_NOT_SUPPORTED_OPERATION);
   }
 }
