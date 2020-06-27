@@ -81,7 +81,7 @@ public class EmployeeController {
 
   @DeleteMapping(value = "/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  @PreAuthorize("#oauth2.hasScope('hrms') and hasAuthority('ROLE_ADMIN')")
+  @PreAuthorize("hasAuthority('ROLE_ADMIN')")
   public void deleteEmployeeById(@PathVariable("id") Long id) {
     employeeService.deleteEmployeeById(id);
   }
