@@ -48,6 +48,7 @@ public class OrganizationController {
   }
 
   @GetMapping(value = "/{organizationId}")
+  @RolesAllowed({ "ROLE_USER","ROLE_TL", "ROLE_ADMIN"})
   public Organization getOrganizationById(@PathVariable Long organizationId)
       throws ServiceException {
     return organizationService.getOrganizationById(organizationId);
@@ -55,7 +56,7 @@ public class OrganizationController {
 
   @PostMapping(value = "")
   @ResponseStatus(HttpStatus.CREATED)
-  @PreAuthorize("#oauth2.hasScope('hrms') and hasAuthority('ROLE_ADMIN')")
+  @PreAuthorize("hasAuthority('ROLE_ADMIN')")
   public Organization createOrganization(
       @Valid @RequestBody @NotNull OrganizationCreateRequest organizationCreateRequest)
       throws EntityAlreadyExistsException {
@@ -63,7 +64,7 @@ public class OrganizationController {
   }
 
   @PatchMapping(value = "/{organizationId}")
-  @PreAuthorize("#oauth2.hasScope('hrms') and hasAuthority('ROLE_ADMIN')")
+  @PreAuthorize("hasAuthority('ROLE_ADMIN')")
   public Organization updateOrganizationById(
       @PathVariable Long organizationId,
       @NotNull @Valid @RequestBody OrganizationUpdateRequest organizationUpdateRequest)
@@ -73,13 +74,13 @@ public class OrganizationController {
 
   @DeleteMapping(value = "{organizationId}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  @PreAuthorize("#oauth2.hasScope('hrms') and hasAuthority('ROLE_ADMIN')")
+  @PreAuthorize("hasAuthority('ROLE_ADMIN')")
   public void deleteOrganizationById(@PathVariable Long organizationId) throws ServiceException {
     organizationService.deleteOrganizationById(organizationId);
   }
 
   @GetMapping(value = "")
-  @RolesAllowed({ "ROLE_USER","ROLE_TL", "ROLE_ADMIN"})
+  @PreAuthorize("hasAuthority('ROLE_ADMIN')")
   public List<Organization> getAllOrganizations() {
     return organizationService.getAllOrganizations();
   }
