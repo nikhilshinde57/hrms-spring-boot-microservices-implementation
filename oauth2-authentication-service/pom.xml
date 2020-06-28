@@ -24,6 +24,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.8</java.version>
     <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
+    <liquibase.version>3.6.3</liquibase.version>
   </properties>
 
   <dependencies>
@@ -68,6 +69,17 @@
       <version>1.18.6</version>
       <scope>provided</scope>
     </dependency>
+
+    <dependency>
+      <groupId>org.liquibase</groupId>
+      <artifactId>liquibase-core</artifactId>
+      <version>${liquibase.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.liquibase</groupId>
+      <artifactId>liquibase-maven-plugin</artifactId>
+      <version>3.5.3</version>
+    </dependency>
   </dependencies>
   <dependencyManagement>
     <dependencies>
@@ -87,6 +99,15 @@
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
     </plugins>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.liquibase</groupId>
+          <artifactId>liquibase-maven-plugin</artifactId>
+          <version>${liquibase.version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
   </build>
   <repositories>
     <repository>

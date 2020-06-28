@@ -14,6 +14,6 @@ import lombok.Data;
 public class Role extends BaseModel {
 
   @Enumerated(EnumType.STRING)
-  @Column(length = 20)
+  @Column(name = "name", nullable = false, length = 20)
   private ERole name;
 }
