@@ -254,7 +254,7 @@ Postman-Token: 75389844-7db3-b93f-be1a-fb85883cec45
 #### Get OAuth Token Request:
 To get the token user need to send the client details like client_id and secret in Authorization and in request body he need to send grant_type,scope, username, password.
 As mentioned earlier the registered client is having values like client_id:hrms and client_secret:yDx01x2YfQ.
-The all postman request call file and screen shots of token retrieval process you can find at this location.     
+The all postman request call file and screenshots of token retrieval process you can find it in /postman_request_file_and_screenshots folder.     
 ```
 POST /oauth/token HTTP/1.1
 Host: localhost:8060
