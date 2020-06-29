@@ -6,23 +6,23 @@ After reading so many blogs, books about microservices we think like yes it's ea
 But in practice it comes up with some challenges and what are those challenges? How we can resolve them ? How actual microservice development works? What steps need to take in the initial phase to start with microservice development? How is it works in production? etc
 All these questions excited me to start writing this project. 
 
-#### Goal to Accomplish
-* **Understand and implement Service Registration & Discovery Microservice using spring cloud eureka-server**
-* **Understand and implement central Config Service from where we can fetch/update configured value at runtime**
-* **Understand and implement individual Microservices and how they register itself at Discovery/Registration Microservice and fetch the configured values from config service**
-* **Understand and implement how to call one microservice form another microservice using FeignClient/RestTemplate**
-* **Understand and implement Hystrix Circuit Breaker**
-* **Understand and implement API Gateway**
-* **Understand and implement Microservice Health checks API using Spring Boot Actuator** Application metrics
-* **Understand and implement Microservice Application Metrics**
-* **Understand and implement API Gateway**
-* **Understand and implement own Authentication Server and Resource Server with OAuth2**
-* **Understand and implement how to Secure microservices**
-* **Understand and implement how to call microservices with oauth token**
-* **Understand and implement how to Dockerize microservices**
-* **Understand and implement how Dockerized individual microservice communicate between each other**
+## Goal to Accomplish
+#### Understand and Implement
+* **Service Registration & Discovery Microservice using spring cloud eureka-server**
+* **Central Config Service from where we can fetch/update configured value at runtime**
+* **Individual Microservices and how they register itself at Discovery/Registration Microservice and fetch the configured values from config service**
+* **How to call one microservice form another microservice using FeignClient/RestTemplate**
+* **Hystrix Circuit Breaker**
+* **API Gateway**
+* **Microservice Health checks API using Spring Boot Actuator** Application metrics
+* **Microservice Application Metrics**
+* **Authentication Server and Resource Server with OAuth2**
+* **How to Secure microservices**
+* **How to call microservices with oauth token**
+* **How to Dockerize microservices**
+* **How Dockerized individual microservice communicate between each other**
 
-#### About HRMS Application
+## About HRMS Application
 The simple plain HRMS application will be having following functionalities
 * **HR will be able to create/update/delete the organization**
 * **HR will be able to create/update/delete an employee under the organization**
@@ -133,7 +133,7 @@ To get all employess we use: http://localhost:8762/employee-service/api/employee
 To get all organizations we use: http://localhost:8762/organization-service/api/organizations  
 ```
 
-### Health Checks
+## Health Checks
 
 - [Organization Service Health Check](http://localhost:8030/actuator/health)
 - [Employee Service Health Check](http://localhost:8040/actuator/health)
@@ -141,7 +141,7 @@ To get all organizations we use: http://localhost:8762/organization-service/api/
 - [Authentication Service Health Check](http://localhost:8060/actuator/health)
 - [Config Service Health Check](http://localhost:8888/actuator/health)
 
-### Application Metrics
+## Application Metrics
 
 - [Organization Service Metrics](http://localhost:8030/actuator/metrics)
 - [Employee Service Metrics](http://localhost:8040/actuator/metrics)
@@ -149,12 +149,12 @@ To get all organizations we use: http://localhost:8762/organization-service/api/
 - [Authentication Service Metrics](http://localhost:8060/actuator/metrics)
 - [Config Service Metrics](http://localhost:8888/actuator/metrics)
 
-### Swagger UI For Functional Microservices
+## Swagger UI For Functional Microservices
 - [Organization Microservice](http://localhost:8030/swagger-ui.html)
 - [Employee Microservice](http://localhost:8040/swagger-ui.html)
 - [Leave Microservice](http://localhost:8050/swagger-ui.html)
 
-### Docker Environment Notes:
+##Docker Environment Notes:
 [Maven](http://maven.apache.org/guides/getting-started/) has been used as a build tool to build Spring Boot based Microservices applications.
 ```
 mvn clean install
@@ -179,7 +179,7 @@ Above command starts all Microservices Docker containers as specified in 'docker
 Service Discovery Microservice: [Here](http://localhost:8761/) you can check all services are up or not and they are registered or not.<br /><br />
 The rest of all the services are exposed on the same port as mentioned earlier.
 
-### How Authentication implemented
+## How Authentication implemented
 
 When the all services are up you can signup up into the system using Authentication service.
 Here we have used the Oauth2 in that we implemented our own Authentication Server.
