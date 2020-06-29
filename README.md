@@ -154,7 +154,7 @@ To get all organizations we use: http://localhost:8762/organization-service/api/
 - [Employee Microservice](http://localhost:8040/swagger-ui.html)
 - [Leave Microservice](http://localhost:8050/swagger-ui.html)
 
-##Docker Environment Notes:
+## Docker Environment Notes:
 [Maven](http://maven.apache.org/guides/getting-started/) has been used as a build tool to build Spring Boot based Microservices applications.
 ```
 mvn clean install
@@ -179,7 +179,7 @@ Above command starts all Microservices Docker containers as specified in 'docker
 Service Discovery Microservice: [Here](http://localhost:8761/) you can check all services are up or not and they are registered or not.<br /><br />
 The rest of all the services are exposed on the same port as mentioned earlier.
 
-## How Authentication implemented
+## Token Retrieval
 
 When the all services are up you can signup up into the system using Authentication service.
 Here we have used the Oauth2 in that we implemented our own Authentication Server.
