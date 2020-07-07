@@ -109,7 +109,7 @@ mvn spring-boot:run -Dspring-boot.run.profiles=local
 ```
 cd gateway-service
 mvn clean install
-mvn spring-boot:run -Dspring-boot.run.profiles=local
+mvn spring-boot:run -Dspring.profiles.active=local
 ```
  
 #### Service Discovery Microservice: 
