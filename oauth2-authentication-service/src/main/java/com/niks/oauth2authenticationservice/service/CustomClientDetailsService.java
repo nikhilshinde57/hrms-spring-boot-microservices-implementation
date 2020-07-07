@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
@@ -19,7 +18,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomClientDetailsService implements ClientDetailsService {
 
-  private static final PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+  @Autowired
+  PasswordEncoder getPasswordEncoder;
+
   @Autowired
   private CustomClientDetailsRepository customClientDetailsRepository;
 
@@ -34,7 +35,7 @@ public class CustomClientDetailsService implements ClientDetailsService {
       String authorities = client.get().getAuthorities();
 
       BaseClientDetails base = new BaseClientDetails(client.get().getClientId(), resourceIds, scopes, grantTypes, authorities);
-      base.setClientSecret(encoder.encode(client.get().getClientSecret()));
+      base.setClientSecret(getPasswordEncoder.encode(client.get().getClientSecret()));
       base.setAccessTokenValiditySeconds(client.get().getAccessTokenValiditySeconds());
       base.setRefreshTokenValiditySeconds(client.get().getRefreshTokenValiditySeconds());
       Collection<String> scopesCollection = Arrays.asList(client.get().getScopes().split(","));
