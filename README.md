@@ -187,28 +187,6 @@ The all our microservices are treated as a resources and we need to authenticate
 At the time of starting of an Authentication microservice we have added/registered the client to our authentication server.
 There are three main roles using that use can SingUp. Those roles are: [ADMIN,TL,USER]
 ```
-ADMIN CAN: 
-    Resource: Organizations
-        Operations: Create/Update/Delete/GetAll
-    Resource: Employee
-        Operations: Create/Update/Delete/Search/GetAll
-    Resource: Employee Leave allocation
-        Operations: Allocate/Update/Delete/GetAll
-    Resource: Organization Leave allocation
-        Operations: Allocate/Update/Delete/GetAll
-    Resource: Employee Leave application
-        Operations: Apply/Update/GetAll/Get
-TL CAN: 
-    Resource: Organizations
-        Operations: GetHisOrganizationInformation
-    Resource: Employee
-        Operations: Search/UpdateHisOwnInformation/GetAllUnderHisEmployee
-    Resource: Employee Leave allocation
-        Operations:NONE
-    Resource: Organization Leave allocation
-        Operations: NONE
-    Resource: Employee Leave application
-        Operations: Apply/Update/GetAll/Get
 USER CAN: 
     Resource: Organizations
         Operations: GetHisOrganizationInformation
@@ -220,6 +198,29 @@ USER CAN:
         Operations: NONE
     Resource: Employee Leave application
         Operations: Apply/UpdateHisOwnLeaveApplication
+TL CAN: 
+    Resource: Organizations
+        Operations: Same as USER can do
+    Resource: Employee
+        Operations: Same as USER can do
+    Resource: Employee Leave allocation
+        Operations:NONE
+    Resource: Organization Leave allocation
+        Operations: NONE
+    Resource: Employee Leave application
+        Operations:  Same as USER can do + GetTeamMembersLeaveApplications
+ADMIN CAN: 
+    Resource: Organizations
+        Operations: Same as TL can do + Create/Update/Delete/GetAll
+    Resource: Employee
+        Operations:  Same as TL can do + Create/Update/Delete/GetAll
+    Resource: Employee Leave allocation
+        Operations: Allocate/Update/Delete/GetAll
+    Resource: Organization Leave allocation
+        Operations: Allocate/Update/Delete/GetAll
+    Resource: Employee Leave application
+        Operations: Same as TL can do + Apply/Update/Get/GetAll
+
 ```
 Here client means the one who want to access/call our resources/microservice like it can be any webui application, mobile app or even postman from where we are accessing/calling the resource.
 The registered client details you can find it in client_details table of authentication service DB. Client details:
