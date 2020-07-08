@@ -1,5 +1,6 @@
 package com.niks.oauth2authenticationservice.service;
 
+import com.niks.oauth2authenticationservice.config.PasswordEncoderConfig;
 import com.niks.oauth2authenticationservice.constants.ErrorMessageConstants;
 import com.niks.oauth2authenticationservice.models.db.Role;
 import com.niks.oauth2authenticationservice.models.db.User;
@@ -10,22 +11,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class UserDetailsCustomService implements UserDetailsService {
 
   @Autowired
   UserRepository userRepository;
 
+  @Autowired
+  PasswordEncoderConfig passwordEncoder;
+
   @Override
   public UserDetails loadUserByUsername(String userName) {
 
     User user = userRepository.findByUserName(userName)
         .orElseThrow(() -> new RoleNotFundException(ErrorMessageConstants.USER_NAME_NOT_FOUND));
-    PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    //PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
     org.springframework.security.core.userdetails.User.UserBuilder builder = org.springframework.security.core.userdetails.User
-        .builder().passwordEncoder(encoder::encode);
+        .builder().passwordEncoder(passwordEncoder.getPasswordEncoder()::encode);
+
     if (user != null) {
       builder = org.springframework.security.core.userdetails.User.withUsername(userName);
       builder.password(user.getPassword());
