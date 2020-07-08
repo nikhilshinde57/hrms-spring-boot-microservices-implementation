@@ -8,14 +8,13 @@ import com.niks.oauth2authenticationservice.models.db.User;
 import com.niks.oauth2authenticationservice.repository.RoleRepository;
 import com.niks.oauth2authenticationservice.repository.UserRepository;
 import com.niks.oauth2authenticationservice.request.SignupRequest;
-import com.niks.oauth2authenticationservice.response.MessageResponse;
+import com.niks.oauth2authenticationservice.service.exception.EntityAlreadyExistsException;
 import com.niks.oauth2authenticationservice.service.exception.RoleNotFundException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Service;
@@ -32,32 +31,30 @@ public class UserService {
   @Autowired
   UserBuilder userBuilder;
 
-  public ResponseEntity registerUser(SignupRequest signUpRequest) {
+  //Exception handling is missing
+  public boolean registerUser(SignupRequest signUpRequest) {
 
     if (userRepository.existsByUserName(signUpRequest.getUsername())) {
-      return ResponseEntity
-          .badRequest()
-          .body(new MessageResponse(ErrorMessageConstants.USER_NAME_ALREADY_IN_USE));
+      throw new EntityAlreadyExistsException(ErrorMessageConstants.USER_NAME_ALREADY_IN_USE);
     }
 
     if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-      return ResponseEntity
-          .badRequest()
-          .body(new MessageResponse(ErrorMessageConstants.USER_EMAIL_ALREADY_IN_USE));
+      throw new EntityAlreadyExistsException(ErrorMessageConstants.USER_EMAIL_ALREADY_IN_USE);
     }
 
     // Create new user's account
     User user = userBuilder.buildFromRequest(signUpRequest);
-
     Set<String> strRoles = signUpRequest.getRole();
     Set<Role> roles = validateAndGetUserRoles(strRoles);
 
     user.setRoles(roles);
     userRepository.save(user);
-    return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    //Service dose not return the response entity
+    return true;
   }
 
   public Map<String, Object> getUserInfo(OAuth2Authentication user) {
+
     Map<String, Object> userInfo = new HashMap<>();
     userInfo.put(
         "user",
@@ -83,7 +80,7 @@ public class UserService {
       roles.add(userRole);
     } else {
       strRoles.forEach(role -> {
-        switch (role) {
+        switch (role.toLowerCase()) {
           case "admin":
             Role adminRole = roleRepository.findByName(ERole.ADMIN)
                 .orElseThrow(() -> new RoleNotFundException(ErrorMessageConstants.ROLE_NOT_FOUND));
