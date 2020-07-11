@@ -1,0 +1,775 @@
+{
+	"variables": [],
+	"info": {
+		"name": "MicroserviceHandsOn",
+		"_postman_id": "fddd2398-4558-d443-d0b4-82b5eada58f5",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetOauthToken",
+			"request": {
+				"url": "localhost:8060/oauth/token",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic aHJtczp5RHgwMXgyWWZR",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "webclient",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "niks",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password1",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "OAuth_Signup",
+			"request": {
+				"url": "http://localhost:8060/oauth/signup",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"niks_tl\",\n\t\"email\":\"niks3@niks.com\",\n\t\"password\":\"password1\",\n\t\"role\":[\"tl\"]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetOauthTokenJWT",
+			"request": {
+				"url": "localhost:8060/oauth/token",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic aHJtczp5RHgwMXgyWWZR",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "webclient",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "niks_tl",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password1",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DecodeOauthTokenAndGetUserInfo",
+			"request": {
+				"url": "localhost:8060/oauth/user",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTMyNTg0NjUsInVzZXJfbmFtZSI6Im5pa3NfdGwiLCJhdXRob3JpdGllcyI6WyJST0xFX1RMIl0sImp0aSI6IjI1NzRmYWE4LTMzZDMtNGFmMS05NjI5LTNjZjMwM2UyYTcyMiIsImNsaWVudF9pZCI6ImhybXMiLCJzY29wZSI6WyJ3ZWJjbGllbnQiXX0.jEwFsSTKXD2f9SvAJHxNveVU0KA7B8cluW1kHZ4F_s4",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Organization_Update",
+			"request": {
+				"url": "localhost:8030/api/organizations/1",
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTMyNTM2MjYsInVzZXJfbmFtZSI6Im5pa3NfdGwiLCJhdXRob3JpdGllcyI6WyJST0xFX1RMIl0sImp0aSI6IjFhMzhiZmJhLWUxMTMtNDE0Mi05NWE2LTY0ODdmY2QyNDMzNiIsImNsaWVudF9pZCI6ImhybXMiLCJzY29wZSI6WyJ3ZWJjbGllbnQiXX0.XkMirhZssx-sXNJyba-Uheet3q5XWqrRlW9ptE3NGh0",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Organization_Delete",
+			"request": {
+				"url": "localhost:8030/api/organizations/1",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTMyNTM2MjYsInVzZXJfbmFtZSI6Im5pa3NfdGwiLCJhdXRob3JpdGllcyI6WyJST0xFX1RMIl0sImp0aSI6IjFhMzhiZmJhLWUxMTMtNDE0Mi05NWE2LTY0ODdmY2QyNDMzNiIsImNsaWVudF9pZCI6ImhybXMiLCJzY29wZSI6WyJ3ZWJjbGllbnQiXX0.XkMirhZssx-sXNJyba-Uheet3q5XWqrRlW9ptE3NGh0",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Organization_Create",
+			"request": {
+				"url": "localhost:8030/api/organizations",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTMyNTM2MjYsInVzZXJfbmFtZSI6Im5pa3NfdGwiLCJhdXRob3JpdGllcyI6WyJST0xFX1RMIl0sImp0aSI6IjFhMzhiZmJhLWUxMTMtNDE0Mi05NWE2LTY0ODdmY2QyNDMzNiIsImNsaWVudF9pZCI6ImhybXMiLCJzY29wZSI6WyJ3ZWJjbGllbnQiXX0.XkMirhZssx-sXNJyba-Uheet3q5XWqrRlW9ptE3NGh0",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"Webshar Pvt ltd\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Oranization_Get",
+			"request": {
+				"url": "localhost:8030/api/organizations/1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTMyNTM2MjYsInVzZXJfbmFtZSI6Im5pa3NfdGwiLCJhdXRob3JpdGllcyI6WyJST0xFX1RMIl0sImp0aSI6IjFhMzhiZmJhLWUxMTMtNDE0Mi05NWE2LTY0ODdmY2QyNDMzNiIsImNsaWVudF9pZCI6ImhybXMiLCJzY29wZSI6WyJ3ZWJjbGllbnQiXX0.XkMirhZssx-sXNJyba-Uheet3q5XWqrRlW9ptE3NGh0",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Organization_Get_All",
+			"request": {
+				"url": "localhost:8030/api/organizations",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTMyNTM2MjYsInVzZXJfbmFtZSI6Im5pa3NfdGwiLCJhdXRob3JpdGllcyI6WyJST0xFX1RMIl0sImp0aSI6IjFhMzhiZmJhLWUxMTMtNDE0Mi05NWE2LTY0ODdmY2QyNDMzNiIsImNsaWVudF9pZCI6ImhybXMiLCJzY29wZSI6WyJ3ZWJjbGllbnQiXX0.XkMirhZssx-sXNJyba-Uheet3q5XWqrRlW9ptE3NGh0",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Employee_Get_All",
+			"request": {
+				"url": "localhost:8040/api/employees/",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTMyNTQ1MjEsInVzZXJfbmFtZSI6Im5pa3NfdGwiLCJhdXRob3JpdGllcyI6WyJST0xFX1RMIl0sImp0aSI6ImU5NDFmMTg1LTgwYjItNGQwMy1iYTRkLTg3OTgyNmMyNGFmMyIsImNsaWVudF9pZCI6ImhybXMiLCJzY29wZSI6WyJ3ZWJjbGllbnQiXX0.W-P8Qq7QUkIywtD0DHnY66J3L_PUjg5PzPurAre2BXs",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Employee_Create",
+			"request": {
+				"url": "localhost:8040/api/employees",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTMyNTQ1MjEsInVzZXJfbmFtZSI6Im5pa3NfdGwiLCJhdXRob3JpdGllcyI6WyJST0xFX1RMIl0sImp0aSI6ImU5NDFmMTg1LTgwYjItNGQwMy1iYTRkLTg3OTgyNmMyNGFmMyIsImNsaWVudF9pZCI6ImhybXMiLCJzY29wZSI6WyJ3ZWJjbGllbnQiXX0.W-P8Qq7QUkIywtD0DHnY66J3L_PUjg5PzPurAre2BXs",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"empId\":\"W105\",\n\t\"organizationId\":5,\n\t\"firstName\":\"Nikhil\",\n\t\"middleName\":\"Dattatray\",\n\t\"lastName\":\"Shinde\",\n\t\"dateOfBirth\":\"1992-10-31\",\n\t\"email\":\"nikhil.shinde+9@webshar.com\",\n\t\"joiningDate\":\"2018-02-25\",\n\t\"contact\":\"9999999999\",\n\t\"designation\":\"Developer\"\n\t\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Employee_Search",
+			"request": {
+				"url": "localhost:8040/api/employees/search",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTMyNTQ1MjEsInVzZXJfbmFtZSI6Im5pa3NfdGwiLCJhdXRob3JpdGllcyI6WyJST0xFX1RMIl0sImp0aSI6ImU5NDFmMTg1LTgwYjItNGQwMy1iYTRkLTg3OTgyNmMyNGFmMyIsImNsaWVudF9pZCI6ImhybXMiLCJzY29wZSI6WyJ3ZWJjbGllbnQiXX0.W-P8Qq7QUkIywtD0DHnY66J3L_PUjg5PzPurAre2BXs",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Employee_Update",
+			"request": {
+				"url": "localhost:8040/api/employees/1",
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTMyNTQ1MjEsInVzZXJfbmFtZSI6Im5pa3NfdGwiLCJhdXRob3JpdGllcyI6WyJST0xFX1RMIl0sImp0aSI6ImU5NDFmMTg1LTgwYjItNGQwMy1iYTRkLTg3OTgyNmMyNGFmMyIsImNsaWVudF9pZCI6ImhybXMiLCJzY29wZSI6WyJ3ZWJjbGllbnQiXX0.W-P8Qq7QUkIywtD0DHnY66J3L_PUjg5PzPurAre2BXs",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Employee_Delete",
+			"request": {
+				"url": "localhost:8040/api/employees/1",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTMyNTQ1MjEsInVzZXJfbmFtZSI6Im5pa3NfdGwiLCJhdXRob3JpdGllcyI6WyJST0xFX1RMIl0sImp0aSI6ImU5NDFmMTg1LTgwYjItNGQwMy1iYTRkLTg3OTgyNmMyNGFmMyIsImNsaWVudF9pZCI6ImhybXMiLCJzY29wZSI6WyJ3ZWJjbGllbnQiXX0.W-P8Qq7QUkIywtD0DHnY66J3L_PUjg5PzPurAre2BXs",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Leave_Allocation_Emp_Get_All",
+			"request": {
+				"url": "localhost:8050/api/leave-allocation/employees",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTMyNTY4MjEsInVzZXJfbmFtZSI6Im5pa3NfdGwiLCJhdXRob3JpdGllcyI6WyJST0xFX1RMIl0sImp0aSI6IjUwOTYwYzEzLWYxYWEtNDQyMS05ZTJiLTFhYjRjZjYyMmIwNCIsImNsaWVudF9pZCI6ImhybXMiLCJzY29wZSI6WyJ3ZWJjbGllbnQiXX0.Ss68RJFItQxJBePAqq8Bp-XAQTLMSA0rQc6rvKWXHyI",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Leave_Allocation-Emp_Get",
+			"request": {
+				"url": {
+					"raw": "localhost:8050/api/leave-allocation/employees?employeeId=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8050",
+					"path": [
+						"api",
+						"leave-allocation",
+						"employees"
+					],
+					"query": [
+						{
+							"key": "employeeId",
+							"value": "1",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTMyNTY4MjEsInVzZXJfbmFtZSI6Im5pa3NfdGwiLCJhdXRob3JpdGllcyI6WyJST0xFX1RMIl0sImp0aSI6IjUwOTYwYzEzLWYxYWEtNDQyMS05ZTJiLTFhYjRjZjYyMmIwNCIsImNsaWVudF9pZCI6ImhybXMiLCJzY29wZSI6WyJ3ZWJjbGllbnQiXX0.Ss68RJFItQxJBePAqq8Bp-XAQTLMSA0rQc6rvKWXHyI",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Leave_Allocation_Emp_Create",
+			"request": {
+				"url": "localhost:8050/api/leave-allocation/employees",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTMyNTY4MjEsInVzZXJfbmFtZSI6Im5pa3NfdGwiLCJhdXRob3JpdGllcyI6WyJST0xFX1RMIl0sImp0aSI6IjUwOTYwYzEzLWYxYWEtNDQyMS05ZTJiLTFhYjRjZjYyMmIwNCIsImNsaWVudF9pZCI6ImhybXMiLCJzY29wZSI6WyJ3ZWJjbGllbnQiXX0.Ss68RJFItQxJBePAqq8Bp-XAQTLMSA0rQc6rvKWXHyI",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"additionalLeaves\": 0,\n  \"allottedLeaves\": 0,\n  \"carriedLeaves\": 0,\n  \"employeeId\": 0,\n  \"endDate\": \"2020-06-29\",\n  \"leaveTypeId\": 0,\n  \"startDate\": \"2020-06-28\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Leave_Allocation_Emp_Update",
+			"request": {
+				"url": "localhost:8050/api/leave-allocation/employees/1",
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTMyNTY4MjEsInVzZXJfbmFtZSI6Im5pa3NfdGwiLCJhdXRob3JpdGllcyI6WyJST0xFX1RMIl0sImp0aSI6IjUwOTYwYzEzLWYxYWEtNDQyMS05ZTJiLTFhYjRjZjYyMmIwNCIsImNsaWVudF9pZCI6ImhybXMiLCJzY29wZSI6WyJ3ZWJjbGllbnQiXX0.Ss68RJFItQxJBePAqq8Bp-XAQTLMSA0rQc6rvKWXHyI",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"additionalLeaves\": 0,\n  \"allottedLeaves\": 0,\n  \"carriedLeaves\": 0,\n  \"employeeId\": 0,\n  \"endDate\": \"2020-06-29\",\n  \"leaveTypeId\": 0,\n  \"startDate\": \"2020-06-28\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Leave_Allocation_Emp_Delete",
+			"request": {
+				"url": {
+					"raw": "localhost:8050/api/leave-allocation/employees?employeeId=1&&leaveTypeId=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8050",
+					"path": [
+						"api",
+						"leave-allocation",
+						"employees"
+					],
+					"query": [
+						{
+							"key": "employeeId",
+							"value": "1",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "leaveTypeId",
+							"value": "1",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "",
+							"value": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTMyNTY4MjEsInVzZXJfbmFtZSI6Im5pa3NfdGwiLCJhdXRob3JpdGllcyI6WyJST0xFX1RMIl0sImp0aSI6IjUwOTYwYzEzLWYxYWEtNDQyMS05ZTJiLTFhYjRjZjYyMmIwNCIsImNsaWVudF9pZCI6ImhybXMiLCJzY29wZSI6WyJ3ZWJjbGllbnQiXX0.Ss68RJFItQxJBePAqq8Bp-XAQTLMSA0rQc6rvKWXHyI",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Leave_Application_Emp_Get_All",
+			"request": {
+				"url": "localhost:8050/api/leave-application/employees/",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTMyNTc5MjksInVzZXJfbmFtZSI6Im5pa3NfdGwiLCJhdXRob3JpdGllcyI6WyJST0xFX1RMIl0sImp0aSI6IjVhMDBjYzhiLWU0OTEtNDUzYi1hOWY2LTczOWY5OWJjMzUwZiIsImNsaWVudF9pZCI6ImhybXMiLCJzY29wZSI6WyJ3ZWJjbGllbnQiXX0.9eLbEinBiefonrO5K7npemx1YpOK0nJLDvEtEftxnAg",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Leave_Application_Emp_Get",
+			"request": {
+				"url": {
+					"raw": "localhost:8050/api/leave-application/employees?employeeId=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8050",
+					"path": [
+						"api",
+						"leave-application",
+						"employees"
+					],
+					"query": [
+						{
+							"key": "employeeId",
+							"value": "1",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTMyNTc5MjksInVzZXJfbmFtZSI6Im5pa3NfdGwiLCJhdXRob3JpdGllcyI6WyJST0xFX1RMIl0sImp0aSI6IjVhMDBjYzhiLWU0OTEtNDUzYi1hOWY2LTczOWY5OWJjMzUwZiIsImNsaWVudF9pZCI6ImhybXMiLCJzY29wZSI6WyJ3ZWJjbGllbnQiXX0.9eLbEinBiefonrO5K7npemx1YpOK0nJLDvEtEftxnAg",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Leave_Application_Emp_Create",
+			"request": {
+				"url": "localhost:8050/api/leave-application/employees",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTMyNTc5MjksInVzZXJfbmFtZSI6Im5pa3NfdGwiLCJhdXRob3JpdGllcyI6WyJST0xFX1RMIl0sImp0aSI6IjVhMDBjYzhiLWU0OTEtNDUzYi1hOWY2LTczOWY5OWJjMzUwZiIsImNsaWVudF9pZCI6ImhybXMiLCJzY29wZSI6WyJ3ZWJjbGllbnQiXX0.9eLbEinBiefonrO5K7npemx1YpOK0nJLDvEtEftxnAg",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"employeeId\": 0,\n  \"endDate\": \"2020-06-29\",\n  \"leaveTypeId\": 0,\n  \"startDate\": \"2020-06-28\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Leave_Application_Emp_Update",
+			"request": {
+				"url": "localhost:8050/api/leave-application/employees/1",
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTMyNTc5MjksInVzZXJfbmFtZSI6Im5pa3NfdGwiLCJhdXRob3JpdGllcyI6WyJST0xFX1RMIl0sImp0aSI6IjVhMDBjYzhiLWU0OTEtNDUzYi1hOWY2LTczOWY5OWJjMzUwZiIsImNsaWVudF9pZCI6ImhybXMiLCJzY29wZSI6WyJ3ZWJjbGllbnQiXX0.9eLbEinBiefonrO5K7npemx1YpOK0nJLDvEtEftxnAg",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"employeeId\": 0,\n  \"leaveStatusId\": 0\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Leave_Allocation_Org_Get_All",
+			"request": {
+				"url": "localhost:8050/api/leave-allocation/organizations",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTMyNTg0NjUsInVzZXJfbmFtZSI6Im5pa3NfdGwiLCJhdXRob3JpdGllcyI6WyJST0xFX1RMIl0sImp0aSI6IjI1NzRmYWE4LTMzZDMtNGFmMS05NjI5LTNjZjMwM2UyYTcyMiIsImNsaWVudF9pZCI6ImhybXMiLCJzY29wZSI6WyJ3ZWJjbGllbnQiXX0.jEwFsSTKXD2f9SvAJHxNveVU0KA7B8cluW1kHZ4F_s4",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Leave_Allocation_Org_Create",
+			"request": {
+				"url": "localhost:8050/api/leave-allocation/organizations",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTMyNTg0NjUsInVzZXJfbmFtZSI6Im5pa3NfdGwiLCJhdXRob3JpdGllcyI6WyJST0xFX1RMIl0sImp0aSI6IjI1NzRmYWE4LTMzZDMtNGFmMS05NjI5LTNjZjMwM2UyYTcyMiIsImNsaWVudF9pZCI6ImhybXMiLCJzY29wZSI6WyJ3ZWJjbGllbnQiXX0.jEwFsSTKXD2f9SvAJHxNveVU0KA7B8cluW1kHZ4F_s4",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"count\": 1,\n  \"leaveTypeId\": 1,\n  \"organizationId\": 1\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Leave_Allocation_Org_Update",
+			"request": {
+				"url": "localhost:8050/api/leave-allocation/organizations/1",
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTMyNTg0NjUsInVzZXJfbmFtZSI6Im5pa3NfdGwiLCJhdXRob3JpdGllcyI6WyJST0xFX1RMIl0sImp0aSI6IjI1NzRmYWE4LTMzZDMtNGFmMS05NjI5LTNjZjMwM2UyYTcyMiIsImNsaWVudF9pZCI6ImhybXMiLCJzY29wZSI6WyJ3ZWJjbGllbnQiXX0.jEwFsSTKXD2f9SvAJHxNveVU0KA7B8cluW1kHZ4F_s4",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"count\": 1,\n  \"leaveTypeId\": 1,\n  \"organizationId\": 1\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Leave_Allocation_Org_Delete",
+			"request": {
+				"url": "localhost:8050/api/leave-allocation/organizations/1",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTMyNTg0NjUsInVzZXJfbmFtZSI6Im5pa3NfdGwiLCJhdXRob3JpdGllcyI6WyJST0xFX1RMIl0sImp0aSI6IjI1NzRmYWE4LTMzZDMtNGFmMS05NjI5LTNjZjMwM2UyYTcyMiIsImNsaWVudF9pZCI6ImhybXMiLCJzY29wZSI6WyJ3ZWJjbGllbnQiXX0.jEwFsSTKXD2f9SvAJHxNveVU0KA7B8cluW1kHZ4F_s4",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Leave_Allocation_Org_Get",
+			"request": {
+				"url": {
+					"raw": "localhost:8050/api/leave-allocation/organizations?organizationId=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8050",
+					"path": [
+						"api",
+						"leave-allocation",
+						"organizations"
+					],
+					"query": [
+						{
+							"key": "organizationId",
+							"value": "1",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTMyNTg0NjUsInVzZXJfbmFtZSI6Im5pa3NfdGwiLCJhdXRob3JpdGllcyI6WyJST0xFX1RMIl0sImp0aSI6IjI1NzRmYWE4LTMzZDMtNGFmMS05NjI5LTNjZjMwM2UyYTcyMiIsImNsaWVudF9pZCI6ImhybXMiLCJzY29wZSI6WyJ3ZWJjbGllbnQiXX0.jEwFsSTKXD2f9SvAJHxNveVU0KA7B8cluW1kHZ4F_s4",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Gateway_Employee_Get_All",
+			"request": {
+				"url": "http://localhost:8762/employee-service/api/employees/",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTMyNjE0NDMsInVzZXJfbmFtZSI6Im5pa3NfdGwiLCJhdXRob3JpdGllcyI6WyJST0xFX1RMIl0sImp0aSI6ImM4MWNmYTA0LWY5MTYtNGFmZS04MjFlLTIwNjQ0NTAxYjMxYiIsImNsaWVudF9pZCI6ImhybXMiLCJzY29wZSI6WyJ3ZWJjbGllbnQiXX0.4dd1ggLQaaPhfQU29IVq1a57mPUkO3v6VqKOuSU7hog",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Gateway_Organization_Get_All",
+			"request": {
+				"url": "http://localhost:8762/organization-service/api/organizations/",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTMyNjE0NDMsInVzZXJfbmFtZSI6Im5pa3NfdGwiLCJhdXRob3JpdGllcyI6WyJST0xFX1RMIl0sImp0aSI6ImM4MWNmYTA0LWY5MTYtNGFmZS04MjFlLTIwNjQ0NTAxYjMxYiIsImNsaWVudF9pZCI6ImhybXMiLCJzY29wZSI6WyJ3ZWJjbGllbnQiXX0.4dd1ggLQaaPhfQU29IVq1a57mPUkO3v6VqKOuSU7hog",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Gateway_Leave_Get_All",
+			"request": {
+				"url": "http://localhost:8762/leave-service/api/leave-allocation/organizations",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTMyNjE0NDMsInVzZXJfbmFtZSI6Im5pa3NfdGwiLCJhdXRob3JpdGllcyI6WyJST0xFX1RMIl0sImp0aSI6ImM4MWNmYTA0LWY5MTYtNGFmZS04MjFlLTIwNjQ0NTAxYjMxYiIsImNsaWVudF9pZCI6ImhybXMiLCJzY29wZSI6WyJ3ZWJjbGllbnQiXX0.4dd1ggLQaaPhfQU29IVq1a57mPUkO3v6VqKOuSU7hog",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

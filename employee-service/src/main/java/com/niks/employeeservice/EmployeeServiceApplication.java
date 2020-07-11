@@ -9,6 +9,7 @@ import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
@@ -16,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 @EnableHystrixDashboard
 @EnableCircuitBreaker
 @EnableFeignClients
+@EnableResourceServer
 @EnableHystrix
 public class EmployeeServiceApplication {
 
