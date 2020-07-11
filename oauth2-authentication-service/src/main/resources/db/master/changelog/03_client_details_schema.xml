@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+  <changeSet id="01" author="nikhil.shinde">
+    <sql>
+      CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+    </sql>
+    <createTable tableName="client_details" remarks="Table containing details of client">
+      <column name="id" type="BIGINT" autoIncrement="true">
+        <constraints nullable="false" unique="true" primaryKey="true"/>
+      </column>
+      <column name="guid" type="uuid" defaultValue="uuid_generate_v4()">
+        <constraints nullable="false" unique="true"/>
+      </column>
+      <column name="client_id" type="varchar(100)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="client_secret" type="varchar(100)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="resource_ids" type="boolean">
+      </column>
+      <column name="secret_required" type="boolean">
+      </column>
+      <column name="scoped" type="boolean">
+      </column>
+      <column name="scopes" type="varchar(100)">
+      </column>
+      <column name="authorized_grant_types" type="varchar(100)">
+      </column>
+      <column name="registered_redirect_uris" type="varchar(100)">
+      </column>
+      <column name="authorities" type="varchar(100)">
+      </column>
+      <column name="access_token_validity_seconds" type="BIGINT">
+      </column>
+      <column name="refresh_token_validity_seconds" type="BIGINT">
+      </column>
+      <column name="created_at" type="datetime">
+        <constraints nullable="false"/>
+      </column>
+      <column name="updated_at" type="datetime">
+        <constraints nullable="false"/>
+      </column>
+      <column name="created_by" type="varchar(200)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="updated_by" type="varchar(200)">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+    <sql>
+      INSERT INTO client_details(
+      created_at, created_by, guid, updated_by, updated_at, access_token_validity_seconds, authorized_grant_types,
+      client_id, client_secret, refresh_token_validity_seconds, scoped, scopes, secret_required)
+      VALUES (now(), 'system', '5c27e461-8256-47c9-8dc8-eaf96d836a2b', 'system',now(), 900, 'password',
+      'hrms','yDx01x2YfQ',900, true,'webclient', true);
+    </sql>
+  </changeSet>
+</databaseChangeLog>

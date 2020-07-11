@@ -9,16 +9,6 @@ services:
       - "8761:8761"
     networks:
       - hrms-net
-  gatewayservice:
-    build: ../gateway-service
-    ports:
-      - "8762:8762"
-    environment:
-      - SPRING_PROFILES_ACTIVE=dev
-    depends_on:
-      - eurekaservice
-    networks:
-      - hrms-net
   db:
     build: ../database-service
     image: postgres:latest
@@ -42,11 +32,35 @@ services:
       - eurekaservice
     networks:
       - hrms-net
+  oauth2-authentication-service:
+    build: ../oauth2-authentication-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    ports:
+      - "8060:8060"
+    entrypoint:  sh -c './wait-for.sh --timeout=120 configservice:8888 -- echo "Config service is up and starting OAuth service" && java -jar oauth2_authentication_service-1.0-SNAPSHOT.jar'
+    depends_on:
+      - db
+      - eurekaservice
+      - configservice
+    networks:
+      - hrms-net
+  gatewayservice:
+    build: ../gateway-service
+    ports:
+      - "8762:8762"
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    entrypoint:  sh -c './wait-for.sh --timeout=120 oauth2-authentication-service:8060 -- echo "OAuth service is up now starting Gateway service" && java -jar gateway-service-1.0-SNAPSHOT.jar'
+    depends_on:
+      - eurekaservice
+    networks:
+      - hrms-net
   organization-service:
     build: ../organization-service
     ports:
       - "8030:8030"
-    entrypoint:  sh -c './wait-for.sh --timeout=120 configservice:8888 -- echo "Configservice is up and starting Organization service" && java -jar organization-service-1.0-SNAPSHOT.jar'
+    entrypoint:  sh -c './wait-for.sh --timeout=120 gatewayservice:8762 -- echo "gatewayservice is up now starting Organization service" && java -jar organization-service-1.0-SNAPSHOT.jar'
     environment:
       - SPRING_PROFILES_ACTIVE=dev
     depends_on:
@@ -59,7 +73,7 @@ services:
     build: ../employee-service
     ports:
       - "8040:8040"
-    entrypoint:  sh -c './wait-for.sh --timeout=120 configservice:8888 -- echo "Configservice is up and starting Employee service" && java -jar employee-service-1.0-SNAPSHOT.jar'
+    entrypoint:  sh -c './wait-for.sh --timeout=180 organization-service:8030 -- echo "organization-service is up now starting Employee service" && java -jar employee-service-1.0-SNAPSHOT.jar'
     environment:
       - SPRING_PROFILES_ACTIVE=dev
     depends_on:
@@ -72,7 +86,7 @@ services:
     build: ../leave-service
     ports:
       - "8050:8050"
-    entrypoint:  sh -c './wait-for.sh --timeout=120 configservice:8888 -- echo "Configservice is up and starting Leave service" && java -jar leave-service-1.0-SNAPSHOT.jar'
+    entrypoint:  sh -c './wait-for.sh --timeout=240 employee-service:8040 -- echo "employee-service is up now starting Leave service" && java -jar leave-service-1.0-SNAPSHOT.jar'
     environment:
       - SPRING_PROFILES_ACTIVE=dev
     depends_on:
